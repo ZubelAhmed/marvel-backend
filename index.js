@@ -4,7 +4,7 @@ const cors = require("cors");
 require("dotenv").config();
 
 const app = express();
-const PORT = process.env.PORT || 80;
+const PORT = 8080;
 const MARVEL_API_URL = "https://lereacteur-marvel-api.herokuapp.com";
 const API_KEY = process.env.API_KEY;
 
