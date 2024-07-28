@@ -1,17 +1,17 @@
-const express = require('express');
-const axios = require('axios');
-const cors = require('cors');
-require('dotenv').config();
+const express = require("express");
+const axios = require("axios");
+const cors = require("cors");
+require("dotenv").config();
 
 const app = express();
-const PORT = process.env.PORT || 4000;
-const MARVEL_API_URL = 'https://lereacteur-marvel-api.herokuapp.com';
+const PORT = process.env.PORT || 80;
+const MARVEL_API_URL = "https://lereacteur-marvel-api.herokuapp.com";
 const API_KEY = process.env.API_KEY;
 
 app.use(cors());
 
 // Route to fetch characters list
-app.get('/characters', async (req, res) => {
+app.get("/characters", async (req, res) => {
   try {
     const { limit = 100, skip = 0, name } = req.query;
     const response = await axios.get(`${MARVEL_API_URL}/characters`, {
@@ -21,12 +21,12 @@ app.get('/characters', async (req, res) => {
   } catch (error) {
     res
       .status(500)
-      .json({ error: 'An error occurred while fetching characters.' });
+      .json({ error: "An error occurred while fetching characters." });
   }
 });
 
 // Route to fetch comics list
-app.get('/comics', async (req, res) => {
+app.get("/comics", async (req, res) => {
   try {
     const { limit = 100, skip = 0, title } = req.query;
     const response = await axios.get(`${MARVEL_API_URL}/comics`, {
@@ -34,12 +34,12 @@ app.get('/comics', async (req, res) => {
     });
     res.json(response.data);
   } catch (error) {
-    res.status(500).json({ error: 'An error occurred while fetching comics.' });
+    res.status(500).json({ error: "An error occurred while fetching comics." });
   }
 });
 
 // Route to fetch comic details
-app.get('/comic/:comicId', async (req, res) => {
+app.get("/comic/:comicId", async (req, res) => {
   try {
     const { comicId } = req.params;
     const response = await axios.get(`${MARVEL_API_URL}/comics/${comicId}`, {
@@ -49,11 +49,11 @@ app.get('/comic/:comicId', async (req, res) => {
   } catch (error) {
     res
       .status(500)
-      .json({ error: 'An error occurred while fetching comic details.' });
+      .json({ error: "An error occurred while fetching comic details." });
   }
 });
 
-app.get('/comic/:characterId', async (req, res) => {
+app.get("/comic/:characterId", async (req, res) => {
   try {
     const { characterId } = req.params;
     const response = await axios.get(`${MARVEL_API_URL}/comic/${characterId}`, {
@@ -62,7 +62,7 @@ app.get('/comic/:characterId', async (req, res) => {
     res.json(response.data);
   } catch (error) {
     res.status(500).json({
-      error: 'An error occurred while fetching comic character id details.',
+      error: "An error occurred while fetching comic character id details.",
     });
   }
 });
